@@ -22,10 +22,12 @@ const UserInfo = () => {
         <div className="container">
             {loading && <Loader />}
             <nav className="user--nav">
-                <Link className="user--btn" to={ROUTER.HOME}>
-                    Back</Link>
+                <Link className="user-link" to={ROUTER.HOME}>
+                    <i className="fas fa-arrow-left"></i>
+                    Back
+                </Link>
             </nav>
-            <div className={cx("user--card", {
+            <div className={cx("user-card", {
                 "hidden": loading === true,
             })}>
                 <div className="user--box--img">

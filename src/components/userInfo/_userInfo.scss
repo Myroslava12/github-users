@@ -7,7 +7,42 @@
     height: 4rem;
 }
 
-.user--btn {
+.user-link {
     text-align: left;
     text-decoration: none;
+    color: rgba(255, 255, 255, .9);
+    font-size: 1.3rem;
+    padding: .5rem 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, .9);
+    box-shadow: 0 0 2px rgba(255, 255, 255, .9);
+    border-radius: .1rem;
+    transition: .1s;
+
+    .fas {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.3rem;
+        margin-right: 1rem;
+        transition: .1s;
+    }
+
+    &:hover {
+        color: black;
+    }
+
+    &:hover .fas {
+        transform: scale(1.1);
+        color: black
+    }
+}
+
+.user-card {
+    width: 90%;
+    height: 80vh;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem 1rem;
+    background-color: white;
+    background: linear-gradient(to right bottom,
+    rgba(255, 255, 255, .9),
+    rgba(255, 255, 255, .3));
+    box-shadow: 0 0 4px rgba(255, 255, 255, .3);
 }

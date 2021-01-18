@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILED, FETCH_USER_DATA_REQUEST, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILED} from "./types";
 import {fetchUsers, fetchUserData} from "../api/axios";
 
@@ -11,10 +11,6 @@ function* fetchUsersSaga(action) {
         yield put({type: FETCH_USERS_FAILED})
     }
 }
-
-// export function* mySaga() {
-//     yield takeEvery(FETCH_USERS_REQUEST, fetchUsersSaga);
-// }
 
 function* fetchUserDataSaga(action) {
     try {
@@ -34,7 +30,3 @@ function* sagaSagas() {
 }
 
 export default sagaSagas;
-
-// export function* sagaUserData() {
-//     yield takeEvery(FETCH_USER_DATA_REQUEST, fetchUserDataSaga);
-// }

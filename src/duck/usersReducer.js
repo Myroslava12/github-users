@@ -9,9 +9,10 @@ const initialState = {
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_USERS_REQUEST:
-            return {...state, loading: true};
+            return {...state, loading: true, page: action.payload};
         case FETCH_USERS_SUCCESS: 
-            return {...state, users: [...state.users, ...action.payload], loading: false};
+            const filteredData = action.payload.filter((item) => !state.users.find((el) => el.id === item.id));
+            return {...state, users: [...state.users, ...filteredData], loading: false};
         case FETCH_USERS_FAILED: 
             return {...state, loading: false};
         case SHOW_LOADER: 

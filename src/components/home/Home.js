@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import User from "../user/User";
 import {useDispatch, useSelector} from "react-redux";
-import {getUsersRequest, pageCounter} from "../../duck/actions";
+import { getUsersRequest } from "../../duck/actions";
 import Loader from "../loader/Loader";
-import {data} from "../../data";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -21,34 +20,35 @@ const Home = () => {
         if (loader.current) {
             observer.observe(loader.current)
         }
-    }, []);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [users]);
 
     useEffect(() => {
-        if (!users.length) dispatch(getUsersRequest(page));
+        if(!users.length) dispatch(getUsersRequest(page));
     }, []);
-
-    useEffect(() => {
-        dispatch(getUsersRequest(page));
-    }, [page]);
 
     const handleObserver = (entities) => {
         const target = entities[0];
         if (target.isIntersecting) {
-            dispatch(pageCounter());
+            console.log("Kostya");
+            dispatch(getUsersRequest(page + 30));
         }
     }
 
-    console.log(page, users.length);
+    console.log(users);
 
     return (
         <div className="container">
             <h1 className="title">GitHub Users Information</h1>
             <ul className="users--list">
-                {data.map((user, id) => {
+                {users.map((user, id) => {
                     return <User key={id} user={user} />
                 })}
             </ul>
-            <Loader loader={loader} />
+            {users.length && <Loader loader={loader} />}
         </div>
     )
 }
