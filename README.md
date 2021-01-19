@@ -10,6 +10,7 @@ Fetched users from GitHub API - [github.api](https://developer.github.com/v3/)
 * **Redux** - for organizing state
 * **Redux-saga** - for async actions
 * **Rest API** - GitHub
+* **SASS/SCSS** - for styling components
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
