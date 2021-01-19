@@ -1,5 +1,6 @@
 # GitHub Users Application
 Simple web application displayed a list of GitHub users. 
+
 Fetched users from GitHub API - [github.api](https://developer.github.com/v3/)
 
 ## Technology
