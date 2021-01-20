@@ -1,13 +1,14 @@
 import {
     FETCH_USERS_SUCCESS, 
     FETCH_USERS_REQUEST, 
-    FETCH_USERS_FAILED, 
-    SHOW_LOADER, 
-    HIDE_LOADER,
+    FETCH_USERS_FAILED,
     FETCH_USER_DATA_SUCCESS, 
     FETCH_USER_DATA_REQUEST, 
     FETCH_USER_DATA_FAILED,
-    PAGE_COUNTER
+    PAGE_COUNTER,
+    FETCH_USERS_BY_USERNAME_REQUEST,
+    FETCH_USERS_BY_USERNAME_SUCCESS,
+    FETCH_USERS_BY_USERNAME_FAILED
 } from "./types";
 
 export const getUsersRequest = (payload) => {
@@ -53,5 +54,25 @@ export const getUserDataRequest = (payload) => {
 export const pageCounter = () => {
     return {
         type: PAGE_COUNTER,
+    }
+}
+
+export const getUsersByUsernameRequest = (payload) => {
+    return {
+        type: FETCH_USERS_BY_USERNAME_REQUEST,
+        payload
+    }
+}
+
+export const getUsersByUsernameSuccess = (payload) => {
+    return {
+        type: FETCH_USERS_BY_USERNAME_SUCCESS,
+        payload
+    }
+}
+
+export const getUsersByUsernameFailed = () => {
+    return {
+        type: FETCH_USERS_BY_USERNAME_FAILED
     }
 }

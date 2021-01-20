@@ -2,7 +2,12 @@
     display: block;
 }
 
-.user--nav {
+.user-container {
+    min-height: 100vh;
+    font-family: $fontOpenSans;
+}
+
+.user-nav {
     width: 100%;
     height: 4rem;
 }
@@ -37,12 +42,52 @@
 
 .user-card {
     width: 90%;
-    height: 80vh;
+    height: auto;
     margin: 0 auto;
-    padding: 2rem 1rem 3rem 1rem;
+    padding: 3rem 4rem 7rem 4rem;
     background-color: white;
     background: linear-gradient(to right bottom,
     rgba(255, 255, 255, .9),
     rgba(255, 255, 255, .3));
     box-shadow: 0 0 4px rgba(255, 255, 255, .3);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-box-img {
+    flex-basis: 40%;
+
+    .user-img {
+        display: block;
+        width: 90%;
+        border-radius: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .fab {
+        width: 1.5rem;
+        font-size: 1.6rem;
+        color: #2883d8;
+        margin-right: 1.5rem;
+        text-align: center;
+    }
+
+    .user-info-link {
+        text-decoration: none;
+
+        span {
+            transition: .1s;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            color:black;
+            &:hover {
+                -ms-text-combine-horizontal: scale(1.1);
+            }
+        }
+
+        span:hover {
+            transform: scale(1.1);
+        }
+    }
 }

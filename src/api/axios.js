@@ -19,3 +19,13 @@ export const fetchUserData = async login => {
         return null;
     }
 }
+
+export const fetchUsersByUsername = async username => {
+    try {
+        const response = await axios.get(`https://api.github.com/search/users?q=${username}+in:login&type=users`);
+        return response.data.items;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}

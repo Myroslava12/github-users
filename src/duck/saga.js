@@ -1,18 +1,24 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
-import {FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILED, FETCH_USER_DATA_REQUEST, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILED} from "./types";
-import {fetchUsers, fetchUserData} from "../api/axios";
+import { call, put } from 'redux-saga/effects';
+import { 
+    FETCH_USERS_SUCCESS, 
+    FETCH_USERS_FAILED, 
+    FETCH_USER_DATA_SUCCESS, 
+    FETCH_USER_DATA_FAILED,
+    FETCH_USERS_BY_USERNAME_SUCCESS,
+    FETCH_USERS_BY_USERNAME_FAILED
+} from "./types";
+import { fetchUsers, fetchUserData, fetchUsersByUsername } from "../api/axios";
 
-function* fetchUsersSaga(action) {
+export function* fetchUsersSaga(action) {
     try {
         const users = yield call(fetchUsers, action.payload);
         yield put({type: FETCH_USERS_SUCCESS, payload: users});
     } catch(err) {
-        console.log(action)
         yield put({type: FETCH_USERS_FAILED})
     }
 }
 
-function* fetchUserDataSaga(action) {
+export function* fetchUserDataSaga(action) {
     try {
         const userData = yield call(fetchUserData, action.payload);
         yield put({type: FETCH_USER_DATA_SUCCESS, payload: userData});
@@ -22,11 +28,12 @@ function* fetchUserDataSaga(action) {
     }
 }
 
-function* sagaSagas() {
-    yield all([
-        yield takeEvery(FETCH_USERS_REQUEST, fetchUsersSaga),
-        yield takeEvery(FETCH_USER_DATA_REQUEST, fetchUserDataSaga),
-    ])
+export function* fetchUsersByUsernameSaga(action) {
+    try {
+        const users = yield call(fetchUsersByUsername, action.payload);
+        yield put({type: FETCH_USERS_BY_USERNAME_SUCCESS, payload: users});
+    } catch(err) {
+        console.log(err);
+        yield put({type: FETCH_USERS_BY_USERNAME_FAILED})
+    }
 }
-
-export default sagaSagas;

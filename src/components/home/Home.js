@@ -3,6 +3,7 @@ import User from "../user/User";
 import {useDispatch, useSelector} from "react-redux";
 import { getUsersRequest } from "../../duck/actions";
 import Loader from "../loader/Loader";
+import Form from "../form/Form";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -33,16 +34,16 @@ const Home = () => {
     const handleObserver = (entities) => {
         const target = entities[0];
         if (target.isIntersecting) {
-            console.log("Kostya");
             dispatch(getUsersRequest(page + 30));
         }
     }
 
-    console.log(users);
-
     return (
         <div className="container">
-            <h1 className="title">GitHub Users Information</h1>
+            <header className="header-section">
+                <h1 className="title">GitHub Users Information</h1>
+                <Form />
+            </header>
             <ul className="users--list">
                 {users.map((user, id) => {
                     return <User key={id} user={user} />
