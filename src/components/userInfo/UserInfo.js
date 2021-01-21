@@ -20,6 +20,7 @@ const UserInfo = () => {
 
     return (
         <div className="container user-container">
+            <div className="circle-bg"/>
             {loading && <Loader />}
             <nav className="user-nav">
                 <Link className="user-link" to={ROUTER.HOME}>
@@ -28,20 +29,36 @@ const UserInfo = () => {
                 </Link>
             </nav>
             <div className={cx("user-card", {
-                "hidden": loading === true,
+                "hidden": loading,
             })}>
                 <div className="user-box-img">
                     <img className="user-img" src={data.avatar_url} />
-                    <a className="user-info-link" href={data.html_url} target="_blank">
-                        <i className="fab fa-github"></i>
-                        <span>Profil on GitHub Platform</span>
-                    </a>
                 </div>
-                <div className="user--info">
+                <div className="user-info-box">
                     <h2 className="user-info-name">{data.name}</h2>
-                    <p className="user-info-username">{data.username}</p>
-                    
-                    <p className="user-info-repos">Public Repositories: {data.public_repos}</p>
+                    <p className="user-location">{data.location}</p>
+                    <div className="user-info-container">
+                        <p className="user-info">
+                            <span className="user-detail">GitHub username</span>
+                            <span className="user-text">{data.login}</span>
+                        </p>
+                        {data.company !== null && <p className="user-info">
+                            <span className="user-detail">Company</span>
+                            <span className="user-text">{data.company}</span>
+                        </p>}
+                        <p className="user-info">
+                            <span className="user-detail">Public repositories</span>
+                            <span className="user-text">{data.public_repos}</span>
+                        </p>
+                        <p className="user-info">
+                            <span className="user-detail">Followers</span>
+                            <span className="user-text">{data.followers}</span>
+                        </p>
+                        <p className="user-info">
+                            <span className="user-detail">GitHub url</span>
+                            <a className="user-text user-detail-link" href={data.html_url} target="_blank">User profile</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

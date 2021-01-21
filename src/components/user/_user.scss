@@ -14,15 +14,12 @@
     z-index: 3;
 
     &::before, &::after {
+        @include bgColor;
         position: absolute;
         content: '';
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
-        background-color: white;
-        background: linear-gradient(to right bottom,
-        rgba(255, 255, 255, .5),
-        rgba(255, 255, 255, .1));
         z-index: -1;
     }
 
@@ -81,7 +78,7 @@
     .fas, .fab {
         width: 1.5rem;
         font-size: 1.6rem;
-        color: #2883d8;
+        color: $colorMain;
         margin-right: 1.5rem;
         text-align: center;
     }
