@@ -17,10 +17,13 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
     "classnames": "^2.2.6",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "serve": "^11.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve build",
+    "dev": "react-scripts start",
+    "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
