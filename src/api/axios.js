@@ -1,8 +1,8 @@
-import axios from "axios";
+import {axiosIntance} from "./client";
 
 export const fetchUsers = async page => {
     try {
-        const response = await axios.get(`https://api.github.com/users?since=${page}`);
+        const response = await axiosIntance.get(`users?since=${page}`);
         return response.data;
     } catch (err) {
         console.log(err);
@@ -12,7 +12,7 @@ export const fetchUsers = async page => {
 
 export const fetchUserData = async login => {
     try {
-        const response = await axios.get(`https://api.github.com/users/${login}`);
+        const response = await axiosIntance.get(`users/${login}`);
         return response.data;
     } catch (err) {
         console.log(err);
@@ -22,7 +22,7 @@ export const fetchUserData = async login => {
 
 export const fetchUsersByUsername = async username => {
     try {
-        const response = await axios.get(`https://api.github.com/search/users?q=${username}+in:login&type=users`);
+        const response = await axiosIntance.get(`search/users?q=${username}+in:login&type=users`);
         return response.data.items;
     } catch (err) {
         console.log(err);

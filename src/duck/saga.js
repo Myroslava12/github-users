@@ -37,3 +37,12 @@ export function* fetchUsersByUsernameSaga(action) {
         yield put({type: FETCH_USERS_BY_USERNAME_FAILED})
     }
 }
+
+export function* fetchUsersBySearch(action) {
+    try {
+        const users = yield call(fetchUsersByUsername, action.payload);
+        yield put({type: FETCH_USERS_SUCCESS, payload: users});
+    } catch(err) {
+        yield put({type: FETCH_USERS_FAILED});
+    }
+}

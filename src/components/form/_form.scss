@@ -9,14 +9,15 @@
 
 .form-box {
     width: 100%;
+    position: relative;
 }
 
 .form-input {
     border: 0;
     outline: none;
     background-color: transparent;
-    padding: .5rem 1rem .5rem 0;
-    border-bottom: .1rem solid rgba(255, 255, 255, .6);
+    padding: .5rem .6rem;
+    border: .1rem solid rgba(255, 255, 255, .4);
     width: 100%;
     box-sizing: border-box;
 
@@ -26,7 +27,7 @@
     }
 
     &:focus {
-        box-shadow: 0 0 2px $colorLight;
+        box-shadow: inset 0 0 2px $colorLight;
     }
 }
 
@@ -36,6 +37,7 @@
     border: 0;
     padding: .5rem 2rem;
     border-radius: .1rem;
+    box-sizing: border-box;
     transition: .1s;
     cursor: pointer;
 
@@ -56,15 +58,18 @@
 }
 
 .autocomplete-users {
-    @include bgColor;
+    background: $bgMain;
     width: 23rem;
     height: 20rem;
-    margin: 0 0 0 auto;
     overflow-y: scroll;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    box-shadow: 0 0 2px $colorLight;
+    box-shadow: inset 0 0 5px $colorLight;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    box-sizing: border-box;
 
     &::-webkit-scrollbar {
         display: none;

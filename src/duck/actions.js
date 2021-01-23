@@ -8,7 +8,8 @@ import {
     PAGE_COUNTER,
     FETCH_USERS_BY_USERNAME_REQUEST,
     FETCH_USERS_BY_USERNAME_SUCCESS,
-    FETCH_USERS_BY_USERNAME_FAILED
+    FETCH_USERS_BY_USERNAME_FAILED,
+    FETCH_USERS_BY_SEARCH
 } from "./types";
 
 export const getUsersRequest = (payload) => {
@@ -74,5 +75,12 @@ export const getUsersByUsernameSuccess = (payload) => {
 export const getUsersByUsernameFailed = () => {
     return {
         type: FETCH_USERS_BY_USERNAME_FAILED
+    }
+}
+
+export const getUsersBySearch = (payload) => {
+    return {
+        type: FETCH_USERS_BY_SEARCH,
+        payload
     }
 }

@@ -37,7 +37,7 @@ const Home = () => {
             dispatch(getUsersRequest(page + 30));
         }
     }
-
+    console.log(users);
     return (
         <div className="container">
             <header className="header-section">

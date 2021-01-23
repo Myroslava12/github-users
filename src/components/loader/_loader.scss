@@ -1,4 +1,4 @@
-.loader--spinner {
+.loader-spinner {
     width: 70px;
     height: 70px;
     display: flex;
@@ -24,10 +24,15 @@
     }
 }
 
-.loader--img {
+.loader-img {
     display: block;
     width: 55%;
     animation: image .7s linear infinite;
+}
+
+.loader-spinner-small {
+    width: 40px;
+    height: 40px;
 }
 
 @keyframes spinner {
