@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import User from "../user/User";
 import {useDispatch, useSelector} from "react-redux";
 import { getUsersRequest } from "../../duck/actions";
@@ -46,10 +46,10 @@ const Home = () => {
             </header>
             <ul className="users--list">
                 {users.map((user, id) => {
-                    return <User key={id} user={user} />
+                    return <User key={id} user={user} />;
                 })}
             </ul>
-            {users.length && <Loader loader={loader} />}
+            {users.length > 0 && <Loader loader={loader} />}
         </div>
     )
 }

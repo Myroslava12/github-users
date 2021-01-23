@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { getUsersByUsernameRequest } from "../../duck/actions";
 import { usersByUsernameReducer } from "../../duck/usersByUsernameReducer";
@@ -23,10 +23,11 @@ const Form = () => {
 
     return (
         <div className="form-box">
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit} autocomplete="off">
                 <label htmlFor="name" className="form-label">
                     <input 
                         id="name"
+                        type="text"
                         className="form-input"
                         placeholder="Enter username"
                         value={inputValue}
