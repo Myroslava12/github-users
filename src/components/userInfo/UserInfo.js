@@ -1,19 +1,19 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
-import { getUserDataRequest } from "../../duck/actions";
+import { getUserDataRequest } from "../../duck/userInfo/action";
 import {Link} from "react-router-dom";
 import * as ROUTER from "../../constants/routes";
 import Loader from "../loader/Loader";
 import cx from "classnames";
 import UserDetail from "./UserDetail";
+import {userInfoSelector, loaderUserInfoSelector} from '../../duck/selectors';
 
 const UserInfo = () => {
     const {login} = useParams();
     const dispatch = useDispatch();
-    const data = useSelector(state => state.userData.userData);
-    const loading = useSelector(state => state.userData.loading);
-    console.log(data);
+    const data = useSelector(userInfoSelector);
+    const loading = useSelector(loaderUserInfoSelector);
 
     useEffect(() => {
         dispatch(getUserDataRequest(login));

@@ -20,10 +20,10 @@ export const fetchUserData = async login => {
     }
 }
 
-export const fetchUsersByUsername = async username => {
+export const fetchUsersByUsername = async (username, page) => {
     try {
-        const response = await axiosIntance.get(`search/users?q=${username}+in:login&type=users`);
-        return response.data.items;
+        const response = await axiosIntance.get(`search/users?q=${username}+in:login&type=users&page=${page}`);
+        return response.data;
     } catch (err) {
         console.log(err);
         return [];

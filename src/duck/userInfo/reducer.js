@@ -1,4 +1,8 @@
-import {FETCH_USER_DATA_REQUEST, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILED} from "./types";
+import {
+    FETCH_USER_DATA_REQUEST, 
+    FETCH_USER_DATA_SUCCESS, 
+    FETCH_USER_DATA_FAILED
+} from "./types";
 
 const initialState = {
     userData: {},

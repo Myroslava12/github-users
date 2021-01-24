@@ -1,36 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import { getUsersByUsernameRequest } from "../../duck/actions";
+import { getUsersByUsernameRequest } from "../../duck/usersByUsername/action";
 import * as ROUTER from "../../constants/routes";
 import User from "./User";
 import SmallLoader from "../loader/SmallLoader";
-import {getUsersBySearch} from "../../duck/actions";
+import {getUsersSearch} from "../../duck/usersSearch/action";
+import {usersByUsernameSelector, loaderUsersByUsernameSelector, pageSelector} from "../../duck/selectors";
 
 const Form = () => {
     const dispatch = useDispatch();
-    const usersByUsername = useSelector((state) => state.usersByUsername.usersByUsername);
-    const loader = useSelector((state) => state.usersByUsername.loading);
+    const usersByUsername = useSelector(usersByUsernameSelector);
+    const loader = useSelector(loaderUsersByUsernameSelector);
     const history = useHistory();
+    const page = useSelector(pageSelector);
     const query = new URLSearchParams(history.location.search);
     const queryValue = query.get("query");
-    const [inputValue, setInputValue] = useState(queryValue ? queryValue : '');
+    const [inputValue, setInputValue] = useState(queryValue !== null ? queryValue : '');
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
-        if (inputValue.length > 0) {
-            dispatch(getUsersByUsernameRequest(inputValue));
-        }
     };
+
+    useEffect(() => {
+        if (inputValue.length > 0) {
+            dispatch(getUsersByUsernameRequest(inputValue, page));
+        }
+    }, [inputValue])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (inputValue.length !== 0) {
             history.replace({pathname: ROUTER.HOME, search: `?query=${inputValue}`});
+            dispatch(getUsersSearch(inputValue, page));
         } else {
             return history.replace({pathname: ROUTER.HOME, search: ''});
         }
-        dispatch(getUsersBySearch(inputValue));
     }
 
     return (
@@ -50,9 +55,9 @@ const Form = () => {
                     <i className="fas fa-search" />
                 </button>
             </form>
-            {usersByUsername.length > 0 ? <ul className="autocomplete-users">
+            {usersByUsername.items ? <ul className="autocomplete-users">
                 {loader && <SmallLoader />}
-                {usersByUsername.map((user, id) => {
+                {usersByUsername.items.map((user, id) => {
                     return <User key={id} user={user} />
                 })}
             </ul> : null}
