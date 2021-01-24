@@ -10,9 +10,10 @@ const initialState = {
     page: 1,
 }
 
-export const usersReducer = (state = initialState, action) => {
+export const usersSearchReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_USERS_SEARCH_REQUEST:
+            console.log(action.payload.page)
             return {...state, loading: true, page: action.payload.page}
         case FETCH_USERS_SEARCH_SUCCESS:
             return {...state, users: [...state.users, ...action.payload], loading: false}

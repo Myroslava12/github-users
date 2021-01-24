@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import { getUsersByUsernameRequest } from "../../duck/usersByUsername/action";
@@ -7,6 +7,7 @@ import User from "./User";
 import SmallLoader from "../loader/SmallLoader";
 import {getUsersSearch} from "../../duck/usersSearch/action";
 import {usersByUsernameSelector, loaderUsersByUsernameSelector, pageSelector} from "../../duck/selectors";
+import useOutsideClick from "./outsideClock"; 
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -17,13 +18,20 @@ const Form = () => {
     const query = new URLSearchParams(history.location.search);
     const queryValue = query.get("query");
     const [inputValue, setInputValue] = useState(queryValue !== null ? queryValue : '');
+    const ref = useRef(null);
+    const [isActive, setIsActive] = useState(true);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
     };
 
+    useOutsideClick(ref, () => {
+        setIsActive(false);
+    });
+
     useEffect(() => {
         if (inputValue.length > 0) {
+            setIsActive(true);
             dispatch(getUsersByUsernameRequest(inputValue, page));
         }
     }, [inputValue])
@@ -33,10 +41,13 @@ const Form = () => {
         if (inputValue.length !== 0) {
             history.replace({pathname: ROUTER.HOME, search: `?query=${inputValue}`});
             dispatch(getUsersSearch(inputValue, page));
+            setIsActive(false);
         } else {
             return history.replace({pathname: ROUTER.HOME, search: ''});
         }
     }
+
+    const boxIsActive = usersByUsername.items && isActive;
 
     return (
         <div className="form-box">
@@ -55,7 +66,7 @@ const Form = () => {
                     <i className="fas fa-search" />
                 </button>
             </form>
-            {usersByUsername.items ? <ul className="autocomplete-users">
+            {boxIsActive ? <ul ref={ref} className="autocomplete-users">
                 {loader && <SmallLoader />}
                 {usersByUsername.items.map((user, id) => {
                     return <User key={id} user={user} />
