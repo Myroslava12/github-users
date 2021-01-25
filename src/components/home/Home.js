@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { 
     usersSelector, 
     sinceSelector, 
@@ -25,6 +25,8 @@ const Home = () => {
     const history = useHistory();
     const query = new URLSearchParams(history.location.search);
     const queryValue = query.get("query");
+    const [usersIsVisible, setUsersIsVisible] = useState(false);
+    const [usersSearchIsVisible, setUsersSearchIsVisible] = useState(false);
     
     console.log(usersSearch.length, page);
     
@@ -46,8 +48,12 @@ const Home = () => {
 
     useEffect(() => {
         if (!users.length && !queryValue) {
-            dispatch(getUsersRequest(since))
+            setUsersIsVisible(true);
+            setUsersSearchIsVisible(false);
+            dispatch(getUsersRequest(since));
         }  else if (!usersSearch.length && queryValue) {
+            setUsersSearchIsVisible(true);
+            setUsersIsVisible(false);
             dispatch(getUsersSearch(queryValue, page));
         }
     }, []);
@@ -57,12 +63,11 @@ const Home = () => {
         if (target.isIntersecting && !queryValue) {
             dispatch(getUsersRequest(since + 30));
         } else if (target.isIntersecting && queryValue) {
-            usersSearch.length !== totalCount && dispatch(getUsersSearch(queryValue, page + 1));
+            if (usersSearch.length <= totalCount) {
+                dispatch(getUsersSearch(queryValue, page + 1));
+            }
         }
     }
-
-    const usersSearchIsTruth = usersSearch.length <= totalCount && usersSearch.length !== totalCount;
-    const isUsers = users.length > 0 && users;
 
     return (
         <div className="container">
@@ -77,8 +82,8 @@ const Home = () => {
                     return <User key={id} user={user} />
                 })}
             </ul>
-            {isUsers && <Loader loader={loader} />}
-            {usersSearchIsTruth && <Loader loader={loader} />}
+            {(usersIsVisible && users.length > 0) && <Loader loader={loader} />}
+            {(usersSearchIsVisible && usersSearch.length !== totalCount) && <Loader loader={loader} />}
         </div>
     )
 }
