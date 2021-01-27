@@ -10,7 +10,7 @@ import User from "../user/User";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { getUsersRequest } from "../../duck/users/action";
-import { getUsersSearch } from "../../duck/usersSearch/action";
+import { getUsersSearchNextRequest } from "../../duck/usersSearch/action";
 import Loader from "../loader/Loader";
 import Form from "../form/Form";
 
@@ -28,7 +28,7 @@ const Home = () => {
     const [usersIsVisible, setUsersIsVisible] = useState(false);
     const [usersSearchIsVisible, setUsersSearchIsVisible] = useState(false);
     
-    console.log(usersSearch.length, page);
+    console.log(page);
     
     useEffect(() => {
         const options = {
@@ -54,7 +54,7 @@ const Home = () => {
         }  else if (!usersSearch.length && queryValue) {
             setUsersSearchIsVisible(true);
             setUsersIsVisible(false);
-            dispatch(getUsersSearch(queryValue, page));
+            dispatch(getUsersSearchNextRequest(queryValue, page));
         }
     }, []);
 
@@ -64,7 +64,7 @@ const Home = () => {
             dispatch(getUsersRequest(since + 30));
         } else if (target.isIntersecting && queryValue) {
             if (usersSearch.length <= totalCount) {
-                dispatch(getUsersSearch(queryValue, page + 1));
+                dispatch(getUsersSearchNextRequest(queryValue, page + 1));
             }
         }
     }
@@ -75,7 +75,7 @@ const Home = () => {
                 <h1 className="title">GitHub Users Information</h1>
                 <Form />
             </header>
-            <ul className="users--list">
+            <ul className="users-list">
                 {!queryValue ? users.map((user, id) => {
                     return <User key={id} user={user} />;
                 }) : usersSearch.map((user, id) => {

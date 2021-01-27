@@ -109,3 +109,14 @@
         transform: scale(1.05);
     }
 }
+
+@media #{$mobileScreen} {
+   .form {
+       width: 90%;
+       margin: 0 auto;
+   }
+
+   .form-btn {
+       padding: 0;
+   }
+}

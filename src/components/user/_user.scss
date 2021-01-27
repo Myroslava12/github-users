@@ -1,5 +1,4 @@
 .user-item {
-    flex-basis: 29%;
     box-sizing: border-box;
     box-shadow: 0 0 4px rgba(255, 255, 255, .3);
     margin: 2rem 0;
@@ -103,5 +102,20 @@
 @media (max-width: 1550px) {
     .user-item {
         height: 29rem;
+    }
+}
+
+@media #{$mobileScreen} {
+    .user-item {
+        height: 26rem;
+    }
+
+    .user-name, .user-link {
+        font-size: 1.1rem;
+        line-height: 1.4rem;
+
+        .fas {
+            font-size: 1.1rem;
+        }
     }
 }
