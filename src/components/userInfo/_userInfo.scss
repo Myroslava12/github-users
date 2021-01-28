@@ -161,3 +161,95 @@
         }
     }
 }
+
+@media #{$mobileScreen} {
+    .user-info-link {
+        font-size: 1.2rem;
+        padding: .4rem .9rem;
+
+        .fas {
+            font-size: 1.2rem;
+        }
+    }
+
+    .user-card {
+        height: 45rem;
+        margin: 0 auto 1rem auto;
+        transform: none;
+        left: 0;
+        position: relative;
+        width: 100%;
+
+        .user-bg-box {
+            grid-template-columns: 100%;
+            padding: 2rem 1rem 3rem 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .user-img {
+        width: 14rem;
+        height: 14rem;
+        margin: 0 auto;
+    }
+
+    .user-info-name {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        text-align: center;
+    }
+
+    .user-location {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .user-container {
+        overflow: auto;
+        overflow-x: hidden;
+        padding-bottom: 2rem;
+    }
+
+    .user-detail {
+        font-size: .8rem;
+        width: 86%;
+    }
+
+    .user-text {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+
+    .user-info {
+        grid-template-columns: 35% 65%;
+        align-items: center;
+    }
+}
+
+@media #{$mobileLargeScreen} {
+    .user-card {
+        height: 47rem;
+        margin: 2rem auto 1rem auto;
+        transform: none;
+        left: 0;
+        position: relative;
+        width: 80%;
+
+        .user-bg-box {
+            grid-template-columns: 100%;
+            padding: 2rem 1.5rem 3rem 1.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .user-img {
+        margin: 0 auto 4rem auto;
+    }
+
+    .user-info-name, .user-location {
+        text-align: center;
+        line-height: 2.3rem;
+    }
+}

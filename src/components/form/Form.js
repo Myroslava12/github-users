@@ -32,7 +32,7 @@ const Form = () => {
     useEffect(() => {
         if (inputValue.length > 0) {
             setIsActive(true);
-            dispatch(getUsersByUsernameRequest(inputValue, page));
+            dispatch(getUsersByUsernameRequest(inputValue, 1));
         }
     }, [inputValue])
 
@@ -40,7 +40,7 @@ const Form = () => {
         e.preventDefault();
         if (inputValue.length !== 0) {
             history.replace({pathname: ROUTER.HOME, search: `?query=${inputValue}`});
-            dispatch(getUsersSearch(inputValue, page));
+            dispatch(getUsersSearch(inputValue, 1));
             setIsActive(false);
         } else {
             return history.replace({pathname: ROUTER.HOME, search: ''});

@@ -5,6 +5,11 @@ $bgMain: linear-gradient(to right bottom, #1097c0, #03294d);
 $colorMain: black;
 $colorLight: rgba(255, 255, 255, .9);
 
+$mobileScreen: '(min-width: 320px) and (max-width: 600px)';
+$mobileLargeScreen: '(min-width: 601px) and (max-width: 800px)';
+$tableScreen: '(min-width: 801px) and (max-width: 1024px)';
+$laptopScreen: '(min-width: 1025px) and (max-width: 1399px)';
+
 @mixin bgColor {
     background-color: white;
     background: linear-gradient(to right bottom,

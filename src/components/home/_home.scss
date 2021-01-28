@@ -2,9 +2,9 @@ body {
     background: $bgMain;
 }
 
-.users--list {
-    display: flex;
-    flex-wrap: wrap;
+.users-list {
+    display: grid;
+    grid-template-columns: 28% 28% 28%;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -16,12 +16,6 @@ body {
     box-sizing: border-box;
 }
 
-@media (max-width: 1550px) {
-    .container {
-        width: 100%;
-        padding: 1rem;
-    }
-}
 
 .title {
     font-family: $fontOpenSans;
@@ -31,3 +25,32 @@ body {
     font-weight: 400;
 }
 
+@media (max-width: 1550px) {
+    .container {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media #{$mobileScreen} {
+    .users-list {
+        grid-template-columns: 90%;
+    }
+
+    .title {
+        font-size: 2.1rem;
+        line-height: 2.6rem;
+    }
+}
+
+@media #{$mobileLargeScreen, $tableScreen} {
+    .users-list {
+        grid-template-columns: 46% 46%;
+    }
+}
+
+@media #{$mobileScreen}, #{$mobileLargeScreen}, #{$tableScreen} {
+    body, html {
+        overflow-x: hidden;
+    }
+}
