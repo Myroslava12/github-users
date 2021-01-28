@@ -28,8 +28,6 @@ const Home = () => {
     const [usersIsVisible, setUsersIsVisible] = useState(false);
     const [usersSearchIsVisible, setUsersSearchIsVisible] = useState(false);
     
-    console.log(page);
-    
     useEffect(() => {
         const options = {
             root: null,

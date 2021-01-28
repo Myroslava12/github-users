@@ -6,7 +6,7 @@ import * as ROUTER from "../../constants/routes";
 import User from "./User";
 import SmallLoader from "../loader/SmallLoader";
 import {getUsersSearch} from "../../duck/usersSearch/action";
-import {usersByUsernameSelector, loaderUsersByUsernameSelector, pageSelector} from "../../duck/selectors";
+import {usersByUsernameSelector, loaderUsersByUsernameSelector} from "../../duck/selectors";
 import useOutsideClick from "./outsideClock"; 
 
 const Form = () => {
@@ -14,7 +14,6 @@ const Form = () => {
     const usersByUsername = useSelector(usersByUsernameSelector);
     const loader = useSelector(loaderUsersByUsernameSelector);
     const history = useHistory();
-    const page = useSelector(pageSelector);
     const query = new URLSearchParams(history.location.search);
     const queryValue = query.get("query");
     const [inputValue, setInputValue] = useState(queryValue !== null ? queryValue : '');
