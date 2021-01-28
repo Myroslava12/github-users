@@ -66,12 +66,14 @@ const Form = () => {
                     <i className="fas fa-search" />
                 </button>
             </form>
-            {boxIsActive ? <ul ref={ref} className="autocomplete-users">
-                {loader && <SmallLoader />}
-                {usersByUsername.items.map((user, id) => {
-                    return <User key={id} user={user} />
-                })}
-            </ul> : null}
+            {boxIsActive ? <div className="autocomplete-users-box">
+                <ul ref={ref} className="autocomplete-users">
+                    {loader && <SmallLoader />}
+                    {usersByUsername.items.map((user, id) => {
+                        return <User key={id} user={user} />
+                    })}
+                </ul>
+            </div> : null}
         </div>
     )
 }

@@ -14,7 +14,7 @@ const UserInfo = () => {
     const dispatch = useDispatch();
     const data = useSelector(userInfoSelector);
     const loading = useSelector(loaderUserInfoSelector);
-
+    
     useEffect(() => {
         dispatch(getUserDataRequest(login));
     }, []);
