@@ -28,11 +28,7 @@
 }
 
 .user-bg-box {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    @include positionAbsolute;
     padding: 2rem 1rem 3rem 1rem;
     background-color: white;
     background: $bgLight;

@@ -6,7 +6,8 @@ import {
 
 const initialState = {
     userData: {},
-    loading: false
+    loading: false,
+    err: false
 }
 
 export const userDataReducer = (state = initialState, action) => {
@@ -16,7 +17,7 @@ export const userDataReducer = (state = initialState, action) => {
         case FETCH_USER_DATA_SUCCESS:
             return {...state, userData: action.payload, loading: false};
         case FETCH_USER_DATA_FAILED:
-            return {...state, loading: false};
+            return {...state, loading: false, err: true};
         default: 
             return state;
     }

@@ -4,7 +4,9 @@ import {
     sinceSelector, 
     totalCountSelector, 
     pageSelector,
-    usersSearchSelector
+    usersSearchSelector,
+    usersErr,
+    usersByUsernameSelector
 } from "../../duck/selectors";
 import User from "../user/User";
 import {useHistory} from "react-router-dom";
@@ -21,12 +23,14 @@ const Home = () => {
     const totalCount = useSelector(totalCountSelector);
     const page = useSelector(pageSelector);
     const usersSearch = useSelector(usersSearchSelector);
+    const err = useSelector(usersErr);
     const loader = useRef(null);
     const history = useHistory();
     const query = new URLSearchParams(history.location.search);
     const queryValue = query.get("query");
     const [usersIsVisible, setUsersIsVisible] = useState(false);
     const [usersSearchIsVisible, setUsersSearchIsVisible] = useState(false);
+    const usersByUsername = useSelector(usersByUsernameSelector);
     
     useEffect(() => {
         const options = {
@@ -38,11 +42,12 @@ const Home = () => {
         if (loader.current) {
             observer.observe(loader.current)
         }
-
         return () => {
             observer.disconnect();
         };
     }, [users, usersSearch]);
+
+    console.log(usersByUsername);
 
     useEffect(() => {
         if (!users.length && !queryValue) {
@@ -67,12 +72,17 @@ const Home = () => {
         }
     }
 
+    const isUsersSearch = (usersSearchIsVisible && usersSearch.length !== totalCount);
+    const isUsers = (usersIsVisible && users.length > 0);
+
     return (
         <div className="container">
             <header className="header-section">
                 <h1 className="title">GitHub Users Information</h1>
                 <Form />
             </header>
+            {err && <h2 className="title-not-found">Ooops... Can't find the user!</h2>}
+            {usersByUsername.total_count && <p>Users: {usersByUsername.total_count}</p>}
             <ul className="users-list">
                 {!queryValue ? users.map((user, id) => {
                     return <User key={id} user={user} />;
@@ -80,8 +90,8 @@ const Home = () => {
                     return <User key={id} user={user} />
                 })}
             </ul>
-            {(usersIsVisible && users.length > 0) && <Loader loader={loader} />}
-            {(usersSearchIsVisible && usersSearch.length !== totalCount) && <Loader loader={loader} />}
+            {isUsers && <Loader loader={loader} />}
+            {isUsersSearch && <Loader loader={loader} />}
         </div>
     )
 }

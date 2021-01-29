@@ -1,22 +1,23 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
-import { getUserDataRequest } from "../../duck/userInfo/action";
+import { getUserDataRequest, getUserDataFailed } from "../../duck/userInfo/action";
 import {Link} from "react-router-dom";
 import * as ROUTER from "../../constants/routes";
 import Loader from "../loader/Loader";
 import cx from "classnames";
 import UserDetail from "./UserDetail";
-import {userInfoSelector, loaderUserInfoSelector} from '../../duck/selectors';
+import {userInfoSelector, loaderUserInfoSelector, userInfoErr} from '../../duck/selectors';
 
 const UserInfo = () => {
     const {login} = useParams();
     const dispatch = useDispatch();
     const data = useSelector(userInfoSelector);
     const loading = useSelector(loaderUserInfoSelector);
+    const err = useSelector(userInfoErr);
 
     useEffect(() => {
-        dispatch(getUserDataRequest(login));
+        {!err && dispatch(getUserDataRequest(login))};
     }, []);
 
     return (
@@ -28,7 +29,8 @@ const UserInfo = () => {
                     Back
                 </Link>
             </nav>
-            <div className={cx("user-card", {
+            {err && <h2 className="title-not-found">Ooops... Can't find the user!</h2>}
+            {!err && <div className={cx("user-card", {
                 "hidden": loading,
             })}>
                 <div className="user-bg-box">
@@ -41,7 +43,7 @@ const UserInfo = () => {
                         <UserDetail user={data} />
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

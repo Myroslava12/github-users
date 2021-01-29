@@ -1,7 +1,6 @@
 $fontOpenSans: 'Open Sans', sans-serif;
 $bgLight: linear-gradient(to right bottom,rgba(255, 255, 255, .9), rgba(255, 255, 255, .4));
 $bgMain: linear-gradient(to right bottom, #1097c0, #03294d);
-// $colorMain: #2883d8;
 $colorMain: black;
 $colorLight: rgba(255, 255, 255, .9);
 
@@ -15,4 +14,12 @@ $laptopScreen: '(min-width: 1025px) and (max-width: 1399px)';
     background: linear-gradient(to right bottom,
     rgba(255, 255, 255, .5),
     rgba(255, 255, 255, .1));
+}
+
+@mixin positionAbsolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }

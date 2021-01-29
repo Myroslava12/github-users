@@ -126,17 +126,31 @@
 }
 
 @media #{$mobileScreen} {
-   .form {
-       width: 90%;
+   .form-box {
        margin: 0 auto;
+       grid-template-columns: 90%;
+       grid-template-areas: "a";
    }
+
+   .form {
+       width: 100%;
+   }
+
+   .autocomplete-users-box {
+        grid-template-columns: 90%;
+        grid-template-areas: "b";
+    }
+
+    .autocomplete-users {
+        width: 100%;
+    }
 
    .form-btn {
        padding: 0;
    }
 }
 
-@media #{$mobileLargeScreen, $tableScreen} {
+@media #{$mobileLargeScreen, $tableScreen, $laptopScreen} {
     .form-box {
         grid-template-columns: 35% 56%;
         grid-template-areas: ". a";

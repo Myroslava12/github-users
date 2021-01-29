@@ -7,3 +7,6 @@ export const loaderUsersByUsernameSelector = (state) => state.usersByUsername.lo
 export const loaderUserInfoSelector = state => state.userData.loading;
 export const userInfoSelector = state => state.userData.userData;
 export const usersSearchSelector = state => state.usersSearch.users;
+export const userInfoErr = state => state.userData.err;
+export const usersErr = state => state.users.err;
+export const usersByUsernameErr = state => state.usersByUsername.err;

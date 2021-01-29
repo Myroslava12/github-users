@@ -6,7 +6,7 @@ import * as ROUTER from "../../constants/routes";
 import User from "./User";
 import SmallLoader from "../loader/SmallLoader";
 import {getUsersSearch} from "../../duck/usersSearch/action";
-import {usersByUsernameSelector, loaderUsersByUsernameSelector} from "../../duck/selectors";
+import {usersByUsernameSelector, loaderUsersByUsernameSelector, usersByUsernameErr} from "../../duck/selectors";
 import useOutsideClick from "./outsideClock"; 
 
 const Form = () => {
@@ -19,6 +19,7 @@ const Form = () => {
     const [inputValue, setInputValue] = useState(queryValue !== null ? queryValue : '');
     const ref = useRef(null);
     const [isActive, setIsActive] = useState(true);
+    const err = useSelector(usersByUsernameErr);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
@@ -68,6 +69,7 @@ const Form = () => {
             {boxIsActive ? <div className="autocomplete-users-box">
                 <ul ref={ref} className="autocomplete-users">
                     {loader && <SmallLoader />}
+                    {err && <p>Ooops... can't find the users</p>}
                     {usersByUsername.items.map((user, id) => {
                         return <User key={id} user={user} />
                     })}

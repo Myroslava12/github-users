@@ -9,6 +9,7 @@ const initialState = {
     loading: false,
     since: 0,
     page: 1,
+    err: false
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -19,7 +20,7 @@ export const usersReducer = (state = initialState, action) => {
             const filteredData = action.payload.filter((item) => !state.users.find((el) => el.id === item.id));
             return {...state, users: [...state.users, ...filteredData], loading: false};
         case FETCH_USERS_FAILED: 
-            return {...state, loading: false};
+            return {...state, loading: false, err: true};
         default:
             return state;
     }

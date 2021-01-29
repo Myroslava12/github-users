@@ -6,7 +6,8 @@ import {
 
 const initialState = {
     usersByUsername: [],
-    loading: false
+    loading: false, 
+    err: false
 }
 
 export const usersByUsernameReducer = (state = initialState, action) => {
@@ -16,7 +17,7 @@ export const usersByUsernameReducer = (state = initialState, action) => {
         case FETCH_USERS_BY_USERNAME_SUCCESS:
             return {...state, usersByUsername: action.payload, loading: false};
         case FETCH_USERS_BY_USERNAME_FAILED:
-            return {...state, loading: false};
+            return {...state, loading: false, err: true};
         default:
             return state;
     }
