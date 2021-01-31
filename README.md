@@ -4,7 +4,7 @@ Simple web application displayed a list of GitHub users.
 
 Fetched users from GitHub API - [github.api](https://developer.github.com/v3/)
 
-### Demo: [github users](https://github--users.herokuapp.com/)
+#### Demo: [github users](https://github--users.herokuapp.com/)
 
 ## Technology
 * **React js** - for building user interfaces components
