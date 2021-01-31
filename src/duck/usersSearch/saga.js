@@ -1,25 +1,21 @@
 import { call, put } from 'redux-saga/effects';
-import {
-    FETCH_USERS_SEARCH_SUCCESS,
-    FETCH_USERS_SEARCH_FAILED,
-    FETCH_USERS_SEARCH_NEXT_SUCCESS
-} from './types';
-import {fetchUsersByUsername} from '../../api/axios';
+import { getUsersSearchSuccess, getUsersSearchNextSuccess, getUsersSearchFailed } from "./action";
+import { fetchUsersByUsername } from '../../api/axios';
 
 export function* fetchUsersBySearch(action) {
     try {
         const users = yield call(fetchUsersByUsername, action.payload.value, action.payload.page);
-        yield put({type: FETCH_USERS_SEARCH_SUCCESS, payload: users.items});
+        yield put(getUsersSearchSuccess(users.items));
     } catch(err) {
-        yield put({type: FETCH_USERS_SEARCH_FAILED});
+        yield put(getUsersSearchFailed());
     }
 }
 
 export function* fetchUsersBySearchNext(action) {
     try {
         const users = yield call(fetchUsersByUsername, action.payload.value, action.payload.page);
-        yield put({type: FETCH_USERS_SEARCH_NEXT_SUCCESS, payload: users.items});
+        yield put(getUsersSearchNextSuccess(users.items));
     } catch(err) {
-        yield put({type: FETCH_USERS_SEARCH_FAILED});
+        yield put(getUsersSearchFailed());
     }
 }

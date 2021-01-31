@@ -8,7 +8,6 @@ const initialState = {
     users: [],
     loading: false,
     since: 0,
-    page: 1,
     err: false
 }
 

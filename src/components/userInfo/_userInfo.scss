@@ -33,12 +33,12 @@
     }
 
     &:hover {
-        color: black;
+        color: $colorMain;
     }
 
     &:hover .fas {
         transform: scale(1.1);
-        color: black
+        color: $colorMain;
     }
 }
 
@@ -88,7 +88,7 @@
 }
 
 .user-detail {
-    color: black;
+    color: $colorMain;
     opacity: .5;
     line-height: 1.2rem;
     font-size: 1rem;
@@ -132,7 +132,7 @@
 
 .user-detail-link {
     text-decoration: none;
-    color: black;
+    color: $colorMain;
 
     &:hover {
         text-decoration: underline;

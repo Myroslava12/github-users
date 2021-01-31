@@ -1,11 +1,10 @@
-import {axiosIntance} from "./client";
+import { axiosIntance } from "./client";
 
 export const fetchUsers = async page => {
     try {
         const response = await axiosIntance.get(`users?since=${page}`);
         return response.data;
     } catch (err) {
-        console.log(err);
         return [];
     }
 }
@@ -15,7 +14,6 @@ export const fetchUserData = async login => {
         const response = await axiosIntance.get(`users/${login}`);
         return response.data;
     } catch (err) {
-        console.log(err);
         return null;
     }
 }
@@ -25,7 +23,6 @@ export const fetchUsersByUsername = async (username, page) => {
         const response = await axiosIntance.get(`search/users?q=${username}+in:login&type=users&page=${page}`);
         return response.data;
     } catch (err) {
-        console.log(err);
         return [];
     }
 }

@@ -10,7 +10,8 @@ export const getUsersSearch = (value, page) => {
     return {
         type: FETCH_USERS_SEARCH_REQUEST,
         payload: {
-            value, page
+            value, 
+            page
         }
     }
 }
@@ -32,7 +33,8 @@ export const getUsersSearchNextRequest = (value, page) => {
     return {
         type: FETCH_USERS_SEARCH_NEXT_REQUEST, 
         payload: {
-            value, page
+            value, 
+            page
         }
     }
 }

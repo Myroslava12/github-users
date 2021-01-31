@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { 
     usersSelector, 
     sinceSelector, 
@@ -8,11 +11,10 @@ import {
     usersErr,
     usersByUsernameSelector
 } from "../../duck/selectors";
-import User from "../user/User";
-import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
 import { getUsersRequest } from "../../duck/users/action";
 import { getUsersSearchNextRequest } from "../../duck/usersSearch/action";
+
+import User from "../user/User";
 import Loader from "../loader/Loader";
 import Form from "../form/Form";
 
@@ -72,8 +74,9 @@ const Home = () => {
         }
     }
 
-    const isUsersSearch = (usersSearchIsVisible && usersSearch.length !== totalCount);
+    const isUsersSearch = (usersSearchIsVisible && usersSearch.length !== totalCount && usersSearch.length > 0);
     const isUsers = (usersIsVisible && users.length > 0);
+    const countTotalUsers = (usersSearch.length > 0 && usersByUsername.total_count !== undefined);
 
     return (
         <div className="container">
@@ -82,16 +85,22 @@ const Home = () => {
                 <Form />
             </header>
             {err && <h2 className="title-not-found">Ooops... Can't find the user!</h2>}
-            {usersByUsername.total_count && <p>Users: {usersByUsername.total_count}</p>}
+            {countTotalUsers && <p className="title-count">
+                Users: 
+                <span> {usersByUsername.total_count}</span>
+            </p>}
             <ul className="users-list">
-                {!queryValue ? users.map((user, id) => {
-                    return <User key={id} user={user} />;
-                }) : usersSearch.map((user, id) => {
-                    return <User key={id} user={user} />
+                {queryValue ? usersSearch.map((user, id) => {
+                    return <li key={id} className="user-item">
+                        <User user={user} />
+                    </li>;
+                }) : users.map((user, id) => {
+                    return <li key={id} className="user-item">
+                        <User user={user} />
+                    </li>;
                 })}
             </ul>
-            {isUsers && <Loader loader={loader} />}
-            {isUsersSearch && <Loader loader={loader} />}
+            {(isUsers && !isUsersSearch) ? <Loader loader={loader} /> : <Loader loader={loader} />}
         </div>
     )
 }

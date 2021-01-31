@@ -5,9 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from "./duck/store";
 
-window.store = store;
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

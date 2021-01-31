@@ -7,7 +7,7 @@ const UserDetail = ({user}) => {
                 <span className="user-detail">GitHub username</span>
                 <span className="user-text">{user.login}</span>
             </p>
-            {user.company !== null && <p className="user-info">
+            {user.company !== undefined && <p className="user-info">
                 <span className="user-detail">Company</span>
                 <span className="user-text">{user.company}</span>
             </p>}

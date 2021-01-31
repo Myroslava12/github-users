@@ -1,24 +1,41 @@
 .form {
     width: 23rem;
-    height: auto;
     margin: 0 0 0 auto;
     text-align: right;
-    grid-area: a;
+    grid-area: form;
     display: grid;
     grid-template-columns: 75% 25%;
+    position: relative;
+}
+
+.form-reset-btn {
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, .6);
+    background-color: transparent;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 27%;
+    cursor: pointer;
+
+    &:hover {
+        color: rgba(255, 255, 255, .9);
+    }
 }
 
 .form-box {
     width: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: 29% 29% 29%;
-    grid-template-areas: ". . a";
+    grid-template-columns: 28% 28% 28%;
+    grid-template-areas: ". . form";
     justify-content: space-evenly;
 }
 
 .form-input {
-    border: 0;
     outline: none;
     background-color: transparent;
     padding: .5rem .6rem;
@@ -67,8 +84,8 @@
     top: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 29% 29% 29%;
-    grid-template-areas: ". . b";
+    grid-template-columns: 28% 28% 28%;
+    grid-template-areas: ". . autocomplete";
     justify-content: space-evenly;
 }
 
@@ -77,7 +94,7 @@
     margin: 0 0 0 auto;
     width: 23rem;
     height: 20rem;
-    grid-area: b;
+    grid-area: autocomplete;
     overflow-y: scroll;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -111,7 +128,7 @@
 }
 
 .user-autocomplete-link {
-    color: black;
+    color: $colorMain;
     text-decoration: none;
     font-size: .9rem;
     padding: .2rem .5rem .2rem 0;
@@ -125,11 +142,18 @@
     }
 }
 
+.form-error {
+    text-align: center;
+    font-size: .9rem;
+    line-height: 1.1rem;
+    margin: .8rem 0;
+}
+
 @media #{$mobileScreen} {
    .form-box {
        margin: 0 auto;
        grid-template-columns: 90%;
-       grid-template-areas: "a";
+       grid-template-areas: "form";
    }
 
    .form {
@@ -138,7 +162,7 @@
 
    .autocomplete-users-box {
         grid-template-columns: 90%;
-        grid-template-areas: "b";
+        grid-template-areas: "autocomplete";
     }
 
     .autocomplete-users {
@@ -150,14 +174,30 @@
    }
 }
 
-@media #{$mobileLargeScreen, $tableScreen, $laptopScreen} {
+@media #{$tableScreen, $laptopScreen} {
     .form-box {
-        grid-template-columns: 35% 56%;
-        grid-template-areas: ". a";
+        grid-template-columns: 17% 17% 50%;
+        grid-template-areas: ". . form";
     }
 
     .autocomplete-users-box {
-        grid-template-columns: 35% 56%;
-        grid-template-areas: ". b";
+        grid-template-columns: 17% 17% 50%;
+        grid-template-areas: ". . autocomplete";
+    }
+}
+
+@media #{$mobileLargeScreen} {
+    .form-box {
+        grid-template-columns: 46% 46%;
+        grid-template-areas: ". form";
+    }
+
+    .form, .autocomplete-users {
+        width: 100%;
+    }
+
+    .autocomplete-users-box {
+        grid-template-columns: 46% 46%;
+        grid-template-areas: ". autocomplete";
     }
 }

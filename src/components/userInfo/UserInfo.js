@@ -1,13 +1,18 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import { useParams } from "react-router-dom";
-import { getUserDataRequest, getUserDataFailed } from "../../duck/userInfo/action";
-import {Link} from "react-router-dom";
-import * as ROUTER from "../../constants/routes";
-import Loader from "../loader/Loader";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
 import cx from "classnames";
+
+import { getUserDataRequest } from "../../duck/userInfo/action";
+import { 
+    userInfoSelector, 
+    loaderUserInfoSelector, 
+    userInfoErr 
+} from '../../duck/selectors';
+import * as ROUTER from "../../constants/routes";
+
+import Loader from "../loader/Loader";
 import UserDetail from "./UserDetail";
-import {userInfoSelector, loaderUserInfoSelector, userInfoErr} from '../../duck/selectors';
 
 const UserInfo = () => {
     const {login} = useParams();
@@ -35,7 +40,7 @@ const UserInfo = () => {
             })}>
                 <div className="user-bg-box">
                     <div className="user-box-img">
-                        <img className="user-img" src={data.avatar_url} />
+                        <img className="user-img" src={data.avatar_url} alt="user" />
                     </div>
                     <div className="user-info-box">
                         <h2 className="user-info-name">{data.name}</h2>
